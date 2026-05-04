@@ -1,2 +1,6 @@
+# Build output
+dist/
+build/
+
 # Node Modules
 node_modules/
