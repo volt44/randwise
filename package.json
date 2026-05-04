@@ -7,12 +7,12 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.6.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-scripts": "5.0.1",
     "recharts": "^3.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,12 +21,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -43,11 +37,9 @@
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@eslint/json": "^0.14.0",
-    "eslint": "^8.57.1",
-    "eslint-plugin-prettier": "^5.5.5",
+    "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.6.0",
-    "jiti": "^2.6.1",
-    "typescript-eslint": "^8.59.1"
+    "jiti": "^2.6.1"
   }
 }

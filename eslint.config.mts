@@ -1,14 +1,12 @@
 import js from "@eslint/js";
-import eslint from "@eslint/js";
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import globals from "globals";
-import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import json from "@eslint/json";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig(
   globalIgnores([
+    '**/.claude/',
     '**/dist/',
     '**/build/',
     '**/cdk.out/',
@@ -16,12 +14,31 @@ export default defineConfig(
     '**/.aws-sam/',
     '**/coverage/',
     '**/node_modules/',
+    '**/package-lock.json',
   ]),
-  eslint.configs.recommended,
-  [
-    { files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
-    tseslint.configs.recommended,
-    pluginReact.configs.flat.recommended,
-    eslintPluginPrettier,
-    { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
-  ]);
+  {
+    files: ["**/*.{js,mjs,cjs,jsx}"],
+    ...js.configs.recommended,
+    languageOptions: { globals: globals.browser },
+    rules: {
+      ...js.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,jsx}"],
+    ...pluginReact.configs.flat.recommended,
+    settings: { react: { version: "detect" } },
+    rules: {
+      ...pluginReact.configs.flat.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
+  },
+  {
+    files: ["**/*.test.{js,jsx}", "**/*.spec.{js,jsx}", "**/setupTests.js"],
+    languageOptions: { globals: { ...globals.browser, ...globals.jest } },
+  },
+  { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
+);
